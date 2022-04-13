@@ -1,11 +1,19 @@
-import './App.css';
+import "./App.css";
+import React from "react";
 
-function App() {
+import { Route, Routes } from "react-router-dom";
+import Home from "../src/components/Home";
+import WelcomeScreen from "./components/WelcomeScreen";
+
+const App = () => {
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
+      <Routes>
+        <Route exact path="/" element={<WelcomeScreen />} />
+        <Route exact path="/home" element={<Home />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
