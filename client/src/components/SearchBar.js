@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { onSearch } from "../api/dogsApi";
 
-const SearchBar = () => {
+const SearchBar = ({ setDataBreeds }) => {
   const [dogBreed, setDogBreed] = useState("");
-  const [dataBreeds, setDataBreeds] = useState(null);
 
   const handleChange = (e) => {
     e.defaultPrevented = true;
@@ -13,13 +12,10 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const dogs = [];
-    onSearch(dogBreed).then((r) => dogs.push(r));
-
-    setDataBreeds(dogs);
+    onSearch(dogBreed).then((r) => setDataBreeds(r));
     setDogBreed("");
   };
-  console.log(dataBreeds);
+
   return (
     <div>
       <form onSubmit={handleSubmit}>

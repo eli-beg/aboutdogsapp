@@ -1,10 +1,13 @@
 import React from "react";
 import CardBreedDog from "./CardBreedDog";
 
-const GridBreedDogs = () => {
+const GridBreedDogs = ({ dataBreeds }) => {
   return (
-    <div>
-      <CardBreedDog />
+    <div className="GridBreedDogs">
+      {dataBreeds &&
+        dataBreeds.map((dataBreed) => (
+          <CardBreedDog key={dataBreed.id} dataBreed={dataBreed} />
+        ))}
     </div>
   );
 };
