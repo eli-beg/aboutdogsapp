@@ -27,3 +27,15 @@ export const onSearchImage = async (imageId) => {
     console.error(error);
   }
 };
+
+export const newBreedPost = async (newBreed) => {
+  try {
+    const respuesta = await axios.post(
+      `http://localhost:3001/breeds/add`,
+      newBreed
+    );
+    console.log("holu", respuesta);
+  } catch (error) {
+    console.error(error);
+  }
+};
