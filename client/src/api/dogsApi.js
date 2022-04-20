@@ -1,7 +1,33 @@
 import axios from "axios";
 
 export const getBreeds = async () => {
-  return axios.get("https://api.thedogapi.com/v1/breeds?limit=8");
+  const data = await axios.get("https://api.thedogapi.com/v1/breeds");
+  const arrDogsApi = data.data;
+
+  const arrIndex = [];
+
+  while (arrIndex.length < 50) {
+    var j = Math.floor(Math.random() * arrDogsApi.length);
+
+    const found = arrIndex.includes(j);
+    if (!found) {
+      arrIndex.push(j);
+    }
+
+    if (arrIndex.length === 50) {
+      break;
+    }
+  }
+
+  const newArray = [];
+
+  for (var i = 0; i < arrIndex.length; i++) {
+    const index = arrIndex[i];
+    const found = arrDogsApi[index];
+    newArray.push(found);
+  }
+
+  return newArray;
 };
 
 export const onSearch = async (dogBreed) => {

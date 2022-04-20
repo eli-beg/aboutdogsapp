@@ -9,7 +9,6 @@ const CardBreedDog = ({ dataBreed }) => {
       onSearchImage(dataBreed.reference_image_id).then((r) => setImgUrl(r.url));
     }
   }, [dataBreed]);
-  console.log("hola", dataBreed);
 
   return (
     <div>

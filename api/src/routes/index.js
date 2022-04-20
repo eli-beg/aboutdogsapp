@@ -9,18 +9,17 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 let arrayperros = [];
 
-axios
-  .get('https://api.thedogapi.com/v1/breeds?limit=8')
-  .then((response) => {
-    const array = response.data;
-    console.log(response.data);
-    const listadodedogs = array.map((element) => element.name);
-    console.log('hola', listadodedogs);
-    arrayperros = listadodedogs;
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+// axios
+//   .get('https://api.thedogapi.com/v1/breeds?limit=8')
+//   .then((response) => {
+//     const array = response.data;
+//     console.log(array);
+//     const listadodedogs = array.map((element) => element.name);
+//     arrayperros = listadodedogs;
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
 router.get('/dogs', (req, res) => {
   res.send(arrayperros);
@@ -31,9 +30,33 @@ router.post('/breeds/add', async (req, res) => {
   const breedCreated = await Dog.findOrCreate({
     where: { name: name, life_span: life_span }
   });
-  console.log('holis', breedCreated);
-  // res.send(breedCreated);
+
   return res.send(breedCreated);
 });
+
+let arrayTemperaments = [];
+let finalArrayTemperaments = [];
+axios
+  .get('https://api.thedogapi.com/v1/breeds?limit=100')
+  .then((response) => {
+    const array = response.data;
+    arrayTemperaments = array.map((element) => element.temperament);
+
+    const found = arrayTemperaments.map((e) => e.split(','));
+
+    if (found) {
+      const final = found.join().replace(/ /g, '').split(',');
+      for (var i = 0; i < final.length; i++) {
+        const newTemperament = finalArrayTemperaments.includes(final[i]);
+        if (!newTemperament) {
+          finalArrayTemperaments.push(final[i]);
+        }
+      }
+      console.log('Holis2', finalArrayTemperaments);
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 module.exports = router;
