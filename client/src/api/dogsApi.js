@@ -57,7 +57,7 @@ export const onSearchImage = async (imageId) => {
 export const newBreedPost = async (newBreed) => {
   try {
     const respuesta = await axios.post(
-      `http://localhost:3001/breeds/add`,
+      `http://localhost:3004/breeds/add`,
       newBreed
     );
     console.log("holu", respuesta);

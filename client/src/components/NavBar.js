@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModalNewBreedForm from "./ModalNewBreedForm";
 import SearchBar from "./SearchBar";
 
-const NavBar = ({ setDataBreeds }) => {
+const NavBar = ({ setDataBreeds, handleShowBreeds }) => {
   const [openModalNewBreedForm, setOpenModalNewBreedForm] = useState(false);
 
   const openModal = () => {
@@ -16,15 +16,15 @@ const NavBar = ({ setDataBreeds }) => {
         <SearchBar setDataBreeds={setDataBreeds} />
       </div>
       <div>
-        <input type="checkbox" name="breeds" />
+        <input onClick={handleShowBreeds} type="checkbox" name="breeds" />
         <label>Original Breeds</label>
       </div>
       <div>
-        <input type="checkbox" name="newbreeds" />
+        <input onClick={handleShowBreeds} type="checkbox" name="newbreeds" />
         <label>New Breeds</label>
       </div>
       <div>
-        <input type="checkbox" name="allbreeds" />
+        <input onClick={handleShowBreeds} type="checkbox" name="allbreeds" />
         <label>All </label>
       </div>
       <div>
@@ -35,8 +35,6 @@ const NavBar = ({ setDataBreeds }) => {
       <div>{openModalNewBreedForm ? <ModalNewBreedForm /> : null}</div>
     </div>
   );
-
-  // aca tiene que ir el boton que me abra un modal con un formulario para cargar nuevas razas de perros
 };
 
 export default NavBar;

@@ -8,16 +8,24 @@ import { getBreeds } from "../api/dogsApi";
 const Home = () => {
   const [dataBreeds, setDataBreeds] = useState(null);
   const [dogs, setDogs] = useState(null);
+  const [breedToShow, setBreedToShow] = useState("");
 
   useEffect(() => {
     getBreeds().then((r) => setDogs(r));
   }, []);
-  console.log("hola", dogs);
+  const handleShowBreeds = (e) => {
+    const value = e.target.name;
+    setBreedToShow(value);
+  };
+
   return (
     <div className="NavBarStyle">
-      <NavBar setDataBreeds={setDataBreeds} />{" "}
+      <NavBar
+        setDataBreeds={setDataBreeds}
+        handleShowBreeds={handleShowBreeds}
+      />{" "}
       <GridBreedDogs dataBreeds={dataBreeds} />
-      <GridDogsHome dogs={dogs} />
+      <GridDogsHome dogs={dogs} breedToShow={breedToShow} />
     </div>
   );
 };
