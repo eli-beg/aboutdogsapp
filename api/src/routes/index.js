@@ -2,7 +2,8 @@ const { Router, request, response } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const axios = require('axios');
-const { Dog } = require('../db');
+const { Dog, Temperament } = require('../db');
+
 const router = Router();
 
 // Configurar los routers
@@ -26,37 +27,56 @@ router.get('/dogs', (req, res) => {
 });
 router.post('/breeds/add', async (req, res) => {
   const { name, life_span } = req.body;
-
+  // console.log('holu', req.body);
   const breedCreated = await Dog.findOrCreate({
     where: { name: name, life_span: life_span }
   });
 
   return res.send(breedCreated);
 });
+router.get('/breeds/newbreeds', async (req, res) => {
+  const newBreeds = await Dog.findAll();
 
-let arrayTemperaments = [];
-let finalArrayTemperaments = [];
-axios
-  .get('https://api.thedogapi.com/v1/breeds?limit=100')
-  .then((response) => {
-    const array = response.data;
-    arrayTemperaments = array.map((element) => element.temperament);
+  if (!newBreeds) {
+    res.status(404);
+  }
+  res.json(newBreeds);
+});
 
-    const found = arrayTemperaments.map((e) => e.split(','));
+router.post('/initialtemperaments', async (req, res) => {
+  let arrayTemperaments = [];
+  let finalArrayTemperaments = [];
 
-    if (found) {
-      const final = found.join().replace(/ /g, '').split(',');
-      for (var i = 0; i < final.length; i++) {
-        const newTemperament = finalArrayTemperaments.includes(final[i]);
-        if (!newTemperament) {
-          finalArrayTemperaments.push(final[i]);
+  const initialTemperaments = async () => {
+    try {
+      const respuesta = await axios.get(
+        'https://api.thedogapi.com/v1/breeds?limit=100'
+      );
+      const array = respuesta.data;
+      arrayTemperaments = array.map((element) => element.temperament);
+
+      const found = arrayTemperaments.map((e) => e.split(','));
+
+      if (found) {
+        const final = found.join().replace(/ /g, '').split(',');
+        for (var i = 0; i < final.length; i++) {
+          const newTemperament = finalArrayTemperaments.includes(final[i]);
+          if (!newTemperament) {
+            finalArrayTemperaments.push(final[i]);
+          }
         }
+        console.log('Holis2', finalArrayTemperaments);
       }
-      console.log('Holis2', finalArrayTemperaments);
+    } catch (error) {
+      console.error(error);
     }
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+  };
+  await initialTemperaments();
+  const temperaments = finalArrayTemperaments.map(
+    async (t) => await Temperament.create({ name: t })
+  );
+  await Promise.all(temperaments);
+  return res.send('esta guardado!');
+});
 
 module.exports = router;
