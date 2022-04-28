@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { onSearch } from "../api/dogsApi";
+import { Button, TextField } from "@mui/material";
 
 const SearchBar = ({ setDataBreeds }) => {
   const [dogBreed, setDogBreed] = useState("");
@@ -18,16 +19,25 @@ const SearchBar = ({ setDataBreeds }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="PlaceHolderStyle"
-          type="text"
+      <form id="myform" onSubmit={handleSubmit}>
+        <TextField
+          hiddenLabel
+          id="filled-hidden-label-normal"
           placeholder="Search breeds..."
           value={dogBreed}
           onChange={handleChange}
+          variant="filled"
+          size="small"
+          sx={{ backgroundColor: "white", borderRadius: "5px" }}
         />
-
-        <button type="submit"> search</button>
+        <Button
+          variant="contained"
+          type="submit"
+          form="myform"
+          sx={{ backgroundColor: "394557" }}
+        >
+          Search
+        </Button>
       </form>
     </div>
   );

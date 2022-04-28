@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 import "./Home.css";
-import GridBreedDogs from "./GridBreedDogs";
-import GridDogsHome from "./GridDogsHome";
+import GridSearchBreedDogs from "../components/GridSearchBreedDogs";
+import GridDogsHome from "../components/GridDogsHome";
 import { getBreeds } from "../api/dogsApi";
 import { newBreeds } from "../api/myApi";
 import Button from "@mui/material/Button";
-import { ButtonBase } from "@mui/material";
+import NavBar1 from "../components/NavBar1";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 const Home = () => {
   const [dataBreeds, setDataBreeds] = useState(null);
@@ -34,19 +36,22 @@ const Home = () => {
 
   return (
     <div className="NavBarStyle">
-      <NavBar
+      <NavBar1 setDataBreeds={setDataBreeds} />
+      {/* <NavBar
         setDataBreeds={setDataBreeds}
         handleShowBreeds={handleShowBreeds}
-      />{" "}
-      <Button>Este es un boton</Button>
-      <GridBreedDogs dataBreeds={dataBreeds} />
-      <GridDogsHome
-        dogs={dogs}
-        breedToShow={breedToShow}
-        allDogs={allDogs}
-        newDogs={newDogs}
-      />
-      <div></div>
+      />{" "} */}
+
+      <GridSearchBreedDogs dataBreeds={dataBreeds} />
+      <Grid container sx={{ margin: "100px" }}>
+        <Box sx={{ backgroundColor: "grey" }}>HOLA</Box>
+        <GridDogsHome
+          dogs={dogs}
+          breedToShow={breedToShow}
+          allDogs={allDogs}
+          newDogs={newDogs}
+        />
+      </Grid>
     </div>
   );
 };

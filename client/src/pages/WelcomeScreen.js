@@ -30,7 +30,7 @@ const WelcomeScreen = () => {
               alignItems: "center",
             }}
           >
-            <Typography>Welcome to About Dogs App!</Typography>
+            <Typography>Welcome to About Dogs App!cd api </Typography>
             <Button
               variant="outlined"
               size="large"

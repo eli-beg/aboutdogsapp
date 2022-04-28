@@ -17,7 +17,6 @@ const NewBreedForm = () => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log("hello", newBreed);
 
   const handleSubmit = (e) => {
     e.preventDefault();

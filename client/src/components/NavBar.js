@@ -11,7 +11,6 @@ const NavBar = ({ setDataBreeds, handleShowBreeds }) => {
 
   return (
     <div>
-      <h1>soy la navbarr</h1>
       <div>
         <SearchBar setDataBreeds={setDataBreeds} />
       </div>

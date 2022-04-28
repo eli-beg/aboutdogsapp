@@ -1,7 +1,7 @@
 import React from "react";
 import CardBreedDog from "./CardBreedDog";
 
-const GridBreedDogs = ({ dataBreeds }) => {
+const GridSearchBreedDogs = ({ dataBreeds }) => {
   return (
     <div className="GridBreedDogs">
       {dataBreeds &&
@@ -12,4 +12,4 @@ const GridBreedDogs = ({ dataBreeds }) => {
   );
 };
 
-export default GridBreedDogs;
+export default GridSearchBreedDogs;
