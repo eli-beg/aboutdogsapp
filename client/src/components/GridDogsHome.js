@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CardBreedDog from "./CardBreedDog";
 
@@ -17,10 +18,22 @@ const GridDogsHome = ({ dogs, breedToShow, allDogs, newDogs }) => {
 
   return (
     <div>
-      {dogsToShow &&
-        dogsToShow.map((newDogToShow) => (
-          <CardBreedDog key={newDogToShow.id} dataBreed={newDogToShow} />
-        ))}
+      <Grid
+        container
+        rowSpacing={4}
+        sx={{
+          marginLeft: "0px",
+          marginTop: "0px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        {dogsToShow &&
+          dogsToShow.map((newDogToShow) => (
+            <CardBreedDog key={newDogToShow.id} dataBreed={newDogToShow} />
+          ))}
+      </Grid>
     </div>
   );
 };

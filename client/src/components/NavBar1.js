@@ -1,5 +1,4 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React from "react";
 import SearchBar from "./SearchBar";
 

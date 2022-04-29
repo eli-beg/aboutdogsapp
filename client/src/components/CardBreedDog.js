@@ -1,3 +1,12 @@
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import Grid from "@mui/material/Grid";
 import React, { useEffect, useState } from "react";
 import { onSearchImage } from "../api/dogsApi";
 
@@ -12,9 +21,41 @@ const CardBreedDog = ({ dataBreed }) => {
 
   return (
     <div>
-      <div>{dataBreed.name}</div>
-      <img src={imgUrl} alt="img not found" />
-      <div>TEMPERAMENT : {dataBreed.temperament} </div>
+      <Grid item xs={10} sm={10} sx={{ height: "550px" }}>
+        <Card
+          sx={{
+            maxWidth: "400px",
+            height: "500px",
+            display: "flex",
+            flexDirection: "column",
+            alignContent: "flex-start",
+          }}
+        >
+          <CardMedia
+            component="img"
+            src={imgUrl}
+            alt="img not found"
+            sx={{ height: "100%", maxHeight: "300px" }}
+          />
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <Typography variant="h5" component="h2">
+              {dataBreed.name}
+            </Typography>
+            <Typography variant="body1" align="left" sx={{ fontSize: "12px" }}>
+              TEMPERAMENT: {dataBreed.temperament}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Details</Button>
+          </CardActions>
+        </Card>
+      </Grid>
     </div>
   );
 };

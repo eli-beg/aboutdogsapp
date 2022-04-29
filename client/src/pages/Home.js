@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../components/NavBar";
 import "./Home.css";
 import GridSearchBreedDogs from "../components/GridSearchBreedDogs";
 import GridDogsHome from "../components/GridDogsHome";
 import { getBreeds } from "../api/dogsApi";
 import { newBreeds } from "../api/myApi";
-import Button from "@mui/material/Button";
 import NavBar1 from "../components/NavBar1";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -43,14 +41,26 @@ const Home = () => {
       />{" "} */}
 
       <GridSearchBreedDogs dataBreeds={dataBreeds} />
-      <Grid container sx={{ margin: "100px" }}>
-        <Box sx={{ backgroundColor: "grey" }}>HOLA</Box>
-        <GridDogsHome
-          dogs={dogs}
-          breedToShow={breedToShow}
-          allDogs={allDogs}
-          newDogs={newDogs}
-        />
+      <Grid container sx={{ marginTop: "100px" }}>
+        <Grid container xs={6} sm={4} md={3}>
+          <Box
+            sx={{
+              height: "100vh",
+              width: "100%",
+              backgroundColor: "primary.main",
+            }}
+          >
+            HOLA
+          </Box>
+        </Grid>
+        <Grid container xs={6} sm={2} md={9}>
+          <GridDogsHome
+            dogs={dogs}
+            breedToShow={breedToShow}
+            allDogs={allDogs}
+            newDogs={newDogs}
+          />
+        </Grid>
       </Grid>
     </div>
   );
