@@ -2,9 +2,8 @@ import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CardBreedDog from "./CardBreedDog";
 
-const GridDogsHome = ({ dogs, breedToShow, allDogs, newDogs }) => {
+const GridDogsHome = ({ dogs, breedToShow, allDogs, newDogs, dataBreeds }) => {
   const [dogsToShow, setDogsToShow] = useState();
-  console.log("hola", allDogs);
 
   useEffect(() => {
     if (breedToShow === "allbreeds") {
@@ -15,6 +14,12 @@ const GridDogsHome = ({ dogs, breedToShow, allDogs, newDogs }) => {
       setDogsToShow(newDogs);
     }
   }, [breedToShow, allDogs]);
+
+  useEffect(() => {
+    if (dataBreeds) {
+      setDogsToShow(dataBreeds);
+    }
+  }, [dataBreeds]);
 
   return (
     <div>

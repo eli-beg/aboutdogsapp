@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import GridSearchBreedDogs from "../components/GridSearchBreedDogs";
 import GridDogsHome from "../components/GridDogsHome";
 import { getBreeds } from "../api/dogsApi";
 import { newBreeds } from "../api/myApi";
@@ -34,15 +33,14 @@ const Home = () => {
 
   return (
     <div className="NavBarStyle">
-      <NavBar1 setDataBreeds={setDataBreeds} />
+      <NavBar1 setDataBreeds={setDataBreeds} setBreedToShow={setBreedToShow} />
       {/* <NavBar
         setDataBreeds={setDataBreeds}
         handleShowBreeds={handleShowBreeds}
       />{" "} */}
 
-      <GridSearchBreedDogs dataBreeds={dataBreeds} />
       <Grid container sx={{ marginTop: "100px" }}>
-        <Grid container xs={6} sm={4} md={3}>
+        <Grid item container xs={6} sm={4} md={3}>
           <Box
             sx={{
               height: "100vh",
@@ -53,8 +51,9 @@ const Home = () => {
             HOLA
           </Box>
         </Grid>
-        <Grid container xs={6} sm={2} md={9}>
+        <Grid item container xs={6} sm={2} md={9}>
           <GridDogsHome
+            dataBreeds={dataBreeds}
             dogs={dogs}
             breedToShow={breedToShow}
             allDogs={allDogs}

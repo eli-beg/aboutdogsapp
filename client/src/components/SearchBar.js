@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { onSearch } from "../api/dogsApi";
 import { Button, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = ({ setDataBreeds }) => {
   const [dogBreed, setDogBreed] = useState("");
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     e.defaultPrevented = true;
@@ -14,6 +16,7 @@ const SearchBar = ({ setDataBreeds }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch(dogBreed).then((r) => setDataBreeds(r));
+    navigate(dogBreed);
     setDogBreed("");
   };
 
@@ -30,6 +33,7 @@ const SearchBar = ({ setDataBreeds }) => {
           size="small"
           sx={{ backgroundColor: "white", borderRadius: "5px" }}
         />
+
         <Button
           variant="contained"
           type="submit"

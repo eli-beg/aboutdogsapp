@@ -47,7 +47,11 @@ const CardBreedDog = ({ dataBreed }) => {
             <Typography variant="h5" component="h2">
               {dataBreed.name}
             </Typography>
-            <Typography variant="body1" align="left" sx={{ fontSize: "12px" }}>
+            <Typography
+              variant="body1"
+              align="left"
+              sx={{ fontSize: "12px", marginTop: "5px" }}
+            >
               TEMPERAMENT: {dataBreed.temperament}
             </Typography>
           </CardContent>
