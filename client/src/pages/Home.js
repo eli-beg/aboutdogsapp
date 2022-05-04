@@ -6,6 +6,7 @@ import { newBreeds } from "../api/myApi";
 import NavBar1 from "../components/NavBar1";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import AccordionFilters from "../components/Accordion";
 
 const Home = () => {
   const [dataBreeds, setDataBreeds] = useState(null);
@@ -16,10 +17,12 @@ const Home = () => {
   useEffect(() => {
     getBreeds().then((r) => setDogs(r));
   }, []);
-  const handleShowBreeds = (e) => {
-    const value = e.target.name;
+
+  const handleCheckboxChange = (e) => {
+    let value = e.target.value;
     setBreedToShow(value);
   };
+
   useEffect(() => {
     newBreeds().then((r) => {
       setNewDogs(r.data);
@@ -34,21 +37,10 @@ const Home = () => {
   return (
     <div className="NavBarStyle">
       <NavBar1 setDataBreeds={setDataBreeds} setBreedToShow={setBreedToShow} />
-      {/* <NavBar
-        setDataBreeds={setDataBreeds}
-        handleShowBreeds={handleShowBreeds}
-      />{" "} */}
-
       <Grid container sx={{ marginTop: "100px" }}>
         <Grid item container xs={6} sm={4} md={3}>
-          <Box
-            sx={{
-              height: "100vh",
-              width: "100%",
-              backgroundColor: "primary.main",
-            }}
-          >
-            HOLA
+          <Box sx={{ width: "100%" }}>
+            <AccordionFilters handleCheckboxChange={handleCheckboxChange} />
           </Box>
         </Grid>
         <Grid item container xs={6} sm={2} md={9}>

@@ -26,7 +26,6 @@ const NewBreedForm = () => {
 
   return (
     <div>
-      hola
       <form onSubmit={handleSubmit}>
         <div>
           Name:{" "}
