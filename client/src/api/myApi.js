@@ -7,3 +7,7 @@ export const newBreeds = async () => {
   //     console.error(error);
   //   }
 };
+
+export const allTemperaments = async () => {
+  return await axios.get(`http://localhost:3004/temperaments`);
+};

@@ -42,6 +42,13 @@ router.get('/breeds/newbreeds', async (req, res) => {
   }
   res.json(newBreeds);
 });
+router.get('/temperaments', async (req, res) => {
+  const temperaments = await Temperament.findAll();
+  if (!temperaments) {
+    res.status(404);
+  }
+  res.json(temperaments);
+});
 
 router.post('/initialtemperaments', async (req, res) => {
   let arrayTemperaments = [];

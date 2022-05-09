@@ -10,15 +10,16 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import NewBreedForm from "./NewBreedForm";
+import useStyles from "./muiStyle";
 
-const AccordionFilters = ({ handleCheckboxChange }) => {
+const AccordionFilters = ({ handleCheckboxChange, temperamentsNames }) => {
   const [expanded, setExpanded] = useState(false);
   const handleChange =
     (panelName: string) =>
     (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panelName : false);
     };
-
+  const classes = useStyles();
   return (
     <div>
       <Accordion
@@ -70,9 +71,15 @@ const AccordionFilters = ({ handleCheckboxChange }) => {
         >
           Add a new Breed!
         </AccordionSummary>
-        <AccordionDetails>
-          <NewBreedForm />
-        </AccordionDetails>
+        <div className={classes.root}>
+          <AccordionDetails
+            sx={{
+              width: "300px",
+            }}
+          >
+            <NewBreedForm temperamentsNames={temperamentsNames} />
+          </AccordionDetails>
+        </div>
       </Accordion>
     </div>
   );
