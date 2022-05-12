@@ -25,23 +25,43 @@ let arrayperros = [];
 router.get('/dogs', (req, res) => {
   res.send(arrayperros);
 });
+
 router.post('/breeds/add', async (req, res) => {
-  const { name, life_span } = req.body;
-  // console.log('holu', req.body);
-  const breedCreated = await Dog.findOrCreate({
-    where: { name: name, life_span: life_span }
+  const { name, life_span, height, weight, temperament } = req.body;
+
+  const breedFinded = await Dog.findOne({
+    where: { name: name }
   });
 
-  return res.send(breedCreated);
+  if (!breedFinded) {
+    const breedCreated = await Dog.create({
+      name: name,
+      life_span: life_span,
+      height: height,
+      weight: weight
+    });
+    if (temperament.length) {
+      temperament.map(
+        async (temperament) => await breedCreated.addTemperament(temperament.id)
+      );
+    }
+  } else {
+    console.log("Can't create the breed");
+  }
 });
+
+//////////////////////////
 router.get('/breeds/newbreeds', async (req, res) => {
-  const newBreeds = await Dog.findAll();
+  const newBreeds = await Dog.findAll({ include: [Temperament] });
 
   if (!newBreeds) {
     res.status(404);
   }
+
   res.json(newBreeds);
 });
+
+//////////////////////////
 router.get('/temperaments', async (req, res) => {
   const temperaments = await Temperament.findAll();
   if (!temperaments) {

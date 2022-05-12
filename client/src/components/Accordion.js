@@ -12,14 +12,18 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import NewBreedForm from "./NewBreedForm";
 import useStyles from "./muiStyle";
 
-const AccordionFilters = ({ handleCheckboxChange, temperamentsNames }) => {
+const AccordionFilters = ({
+  handleCheckboxChange,
+  temperamentsNames,
+  checked,
+}) => {
   const [expanded, setExpanded] = useState(false);
-  const handleChange =
-    (panelName: string) =>
-    (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panelName : false);
-    };
+
+  const handleChange = (panelName) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panelName : false);
+  };
   const classes = useStyles();
+
   return (
     <div>
       <Accordion
@@ -38,22 +42,30 @@ const AccordionFilters = ({ handleCheckboxChange, temperamentsNames }) => {
             <FormControlLabel
               control={
                 <Checkbox
-                  defaultChecked
                   onChange={handleCheckboxChange}
                   value="breeds"
+                  checked={checked === "breeds" ? true : false}
                 />
               }
               label="Original Breeds"
             />
             <FormControlLabel
               control={
-                <Checkbox onChange={handleCheckboxChange} value="newbreeds" />
+                <Checkbox
+                  onChange={handleCheckboxChange}
+                  value="newbreeds"
+                  checked={checked === "newbreeds" ? true : false}
+                />
               }
               label="New Breeds"
             />
             <FormControlLabel
               control={
-                <Checkbox onChange={handleCheckboxChange} value="allbreeds" />
+                <Checkbox
+                  onChange={handleCheckboxChange}
+                  value="allbreeds"
+                  checked={checked === "allbreeds" ? true : false}
+                />
               }
               label="All"
             />

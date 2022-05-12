@@ -17,29 +17,16 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      lifeExpectancy: {
+      height: {
         type: DataTypes.STRING,
         allowNull: true
       },
-      maximumHeight: {
+      weight: {
         type: DataTypes.STRING,
         allowNull: true
       },
-      maximumWeight: {
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      minimumHeight: {
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      maximumWeight: {
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      temperaments: {
-        type: DataTypes.STRING,
-        allowNull: true
+      life_span: {
+        type: DataTypes.STRING
       }
     })
     .beforeCreate((dog) => (dog.id = uuidv4()));

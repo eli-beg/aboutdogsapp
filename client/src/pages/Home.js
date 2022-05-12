@@ -13,8 +13,9 @@ const Home = () => {
   const [dataBreeds, setDataBreeds] = useState(null);
   const [dogs, setDogs] = useState(null);
   const [newDogs, setNewDogs] = useState(null);
-  const [breedToShow, setBreedToShow] = useState("allbreeds");
+  const [breedToShow, setBreedToShow] = useState("breeds");
   const [temperamentsNames, setTemperamentsNames] = useState([]);
+  const [checked, setChecked] = useState("");
 
   useEffect(() => {
     getBreeds().then((r) => setDogs(r));
@@ -23,11 +24,18 @@ const Home = () => {
   const handleCheckboxChange = (e) => {
     let value = e.target.value;
     setBreedToShow(value);
+    setChecked(e.target.value);
   };
 
   useEffect(() => {
     newBreeds().then((r) => {
-      setNewDogs(r.data);
+      const newBreedsData = r.data;
+      const newDogsData = newBreedsData.map((b) => ({
+        ...b,
+        temperament: b.temperaments.map((t) => t.name).join(", "),
+      }));
+
+      setNewDogs(newDogsData);
     });
   }, []);
 
@@ -59,6 +67,7 @@ const Home = () => {
           <Box sx={{ width: "100%" }}>
             <AccordionFilters
               handleCheckboxChange={handleCheckboxChange}
+              checked={checked}
               temperamentsNames={temperamentsNames}
             />
           </Box>

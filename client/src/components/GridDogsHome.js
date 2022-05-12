@@ -13,7 +13,7 @@ const GridDogsHome = ({ dogs, breedToShow, allDogs, newDogs, dataBreeds }) => {
     } else if (breedToShow === "newbreeds") {
       setDogsToShow(newDogs);
     }
-  }, [breedToShow, allDogs]);
+  }, [breedToShow, allDogs, dogs, newDogs]);
 
   useEffect(() => {
     if (dataBreeds) {

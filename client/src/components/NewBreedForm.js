@@ -24,28 +24,6 @@ for (var i = 1; i <= 100; i++) {
 }
 
 const NewBreedForm = ({ temperamentsNames }) => {
-  // const newBreedInitialValues = {
-  //   name: "",
-  //   life_span: "",
-  //   temperament: "",
-  // };
-
-  // const [newBreed, setNewBreed] = useState(newBreedInitialValues);
-
-  // const handleNewBreedChange = (e) => {
-  //   e.preventDefault();
-  //   setNewBreed({
-  //     ...newBreed,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   newBreedPost(newBreed);
-  //   setNewBreed(newBreedInitialValues);
-  // };
-
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -59,7 +37,14 @@ const NewBreedForm = ({ temperamentsNames }) => {
     validationSchema: validationSchema,
 
     onSubmit: (values) => {
-      console.log(values);
+      const value = {
+        name: values.name,
+        life_span: values.lifeExpectancy,
+        height: values.minimumHeight.concat(" - ", values.maximumHeight),
+        weight: values.minimumWeight.concat(" - ", values.maximumWeight),
+        temperament: values.temperaments,
+      };
+      newBreedPost(value);
     },
   });
 
@@ -259,50 +244,3 @@ const NewBreedForm = ({ temperamentsNames }) => {
 };
 
 export default NewBreedForm;
-
-// import React, { useState } from "react";
-// import { newBreedPost } from "../api/dogsApi";
-
-// const NewBreedForm = () => {
-//   const newBreedInitialValues = {
-//     name: "",
-//     life_span: "",
-//     temperament: "",
-//   };
-
-//   const [newBreed, setNewBreed] = useState(newBreedInitialValues);
-
-//   const handleNewBreedChange = (e) => {
-//     e.preventDefault();
-//     setNewBreed({
-//       ...newBreed,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     newBreedPost(newBreed);
-//     setNewBreed(newBreedInitialValues);
-//   };
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           Name:{" "}
-//           <input type="text" name="name" onChange={handleNewBreedChange} />
-//         </div>
-//         <div>
-//           Life Span:
-//           <input type="text" name="life_span" onChange={handleNewBreedChange} />
-//         </div>
-//         <div>
-//           <input type="submit" value="Save" />
-//         </div>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default NewBreedForm;

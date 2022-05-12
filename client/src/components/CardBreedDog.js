@@ -24,7 +24,8 @@ const CardBreedDog = ({ dataBreed }) => {
       <Grid item xs={10} sm={10} sx={{ height: "550px" }}>
         <Card
           sx={{
-            maxWidth: "400px",
+            width: "300px",
+            margin: "5px",
             height: "500px",
             display: "flex",
             flexDirection: "column",
